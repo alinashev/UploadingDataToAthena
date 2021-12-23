@@ -2,6 +2,7 @@ from Commons.ChannelsID import ChannelsID
 from Commons.Parquet import Parquet
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
+from Load.Loader import Loader
 from Transform.ChannelParser import ChannelParser
 from Transform.VideoIDParser import VideoIDParser
 from Transform.VideoParsesr import VideoParser
@@ -38,6 +39,26 @@ def main():
     Parquet.load(video_parser.get_dim_video_obj_list(), "dimVideo.parquet")
     Parquet.load(video_parser.get_dim_date_obj_list(), "dimDateVideo.parquet")
     Parquet.load(video_parser.get_dim_time_obj_list(), "dimTimeVideo.parquet")
+
+    storage.upload("factChannel.parquet", "Channel/factChannel")
+    storage.upload("dimChannel.parquet", "Channel/dimChannel")
+    storage.upload("dimDateChannel.parquet", "Channel/dimDateChannel")
+    storage.upload("dimTimeChannel.parquet", "Channel/dimTimeChannel")
+
+    storage.upload("factVideo.parquet", "Video/factVideo")
+    storage.upload("dimVideo.parquet", "Video/dimVideo")
+    storage.upload("dimDateVideo.parquet", "Video/dimDateVideo")
+    storage.upload("dimTimeVideo.parquet", "Video/dimTimeVideo")
+
+    Loader.load("SQLcode/factChannel.sql")
+    Loader.load("SQLcode/dimChannel.sql")
+    Loader.load("SQLcode/dimDateChannel.sql")
+    Loader.load("SQLcode/dimTimeChannel.sql")
+
+    Loader.load("SQLcode/factVideo.sql")
+    Loader.load("SQLcode/dimVideo.sql")
+    Loader.load("SQLcode/dimDateVideo.sql")
+    Loader.load("SQLcode/dimTimeVideo.sql")
 
 
 if __name__ == '__main__':

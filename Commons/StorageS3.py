@@ -7,7 +7,6 @@ from Settings import awsSettings
 
 
 class StorageS3:
-
     def __init__(self) -> None:
         self.connect()
 
@@ -21,7 +20,7 @@ class StorageS3:
     def download_folder(self, destination_directory: str) -> None:
         self.__downloaded_directory = destination_directory
         bucket: Any = self.s3.Bucket(self.__bucket_name)
-        for obj in bucket.objects.filter(Prefix='Resources'):
+        for obj in bucket.objects.filter(Prefix='Resources/Lake/jsonTypesFile/Lambda'):
             if destination_directory is False:
                 self.__path = obj.key
             else:
