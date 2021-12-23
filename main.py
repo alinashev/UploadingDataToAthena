@@ -1,4 +1,5 @@
 from Commons.ChannelsID import ChannelsID
+from Commons.Parquet import Parquet
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
 from Transform.ChannelParser import ChannelParser
@@ -27,6 +28,16 @@ def main():
     channel_parser.parse(json_channel, channel_id)
     video_id_list: list = video_id_parser.parse(json_video_id, channel_id)
     video_parser.parse(json_video_category, video_id_list)
+
+    Parquet.load(channel_parser.get_fact_channel_obj_list(), "factChannel.parquet")
+    Parquet.load(channel_parser.get_dim_channel_obj_list(), "dimChannel.parquet")
+    Parquet.load(channel_parser.get_dim_date_obj_list(), "dimDateChannel.parquet")
+    Parquet.load(channel_parser.get_dim_time_obj_list(), "dimTimeChannel.parquet")
+
+    Parquet.load(video_parser.get_fact_video_obj_list(), "factVideo.parquet")
+    Parquet.load(video_parser.get_dim_video_obj_list(), "dimVideo.parquet")
+    Parquet.load(video_parser.get_dim_date_obj_list(), "dimDateVideo.parquet")
+    Parquet.load(video_parser.get_dim_time_obj_list(), "dimTimeVideo.parquet")
 
 
 if __name__ == '__main__':
