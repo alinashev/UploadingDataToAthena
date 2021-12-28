@@ -4,7 +4,7 @@ import pandas
 from pandas import DataFrame
 
 
-class Parquet:
+class ParquetFormat:
     @staticmethod
     def load(entity: Any, file_name: str) -> None:
         data_frame: DataFrame = pandas.DataFrame([e.to_dict() for e in entity])

@@ -7,5 +7,5 @@ CREATE EXTERNAL TABLE IF NOT EXISTS `atestdb`.`factVideo` (
  `comment_count` bigint
 )
 ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' WITH SERDEPROPERTIES ( 'serialization.format' = '1'
-) LOCATION 's3://task-bucket-a/Parquet/Video/factVideo'
+) LOCATION 's3://task-bucket-a/Parquet/{dir}/Video/factVideo'
 TBLPROPERTIES ('has_encrypted_data'='false')

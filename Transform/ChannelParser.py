@@ -25,14 +25,20 @@ class ChannelParser(Parser):
 
             self.dim_date_obj_list.append(date)
             self.dim_time_obj_list.append(time)
+
+            try:
+                subscriberCount: int = int(json_string[channel_id]["items"][0]["statistics"]["subscriberCount"])
+            except KeyError:
+                subscriberCount = subscriberCount
+
             self.fact_channel_obj_list.append(
                 FactChannel(str(ChannelsID[channel_id]),
                             str(date.get_date_id()),
                             str(time.get_time_id()),
                             int(json_string[channel_id]["items"][0]["statistics"]["viewCount"]),
-                            int(json_string[channel_id]["items"][0]["statistics"]["subscriberCount"]),
+                            subscriberCount,
                             int(json_string[channel_id]["items"][0]["statistics"]["videoCount"])
-                )
+                            )
             )
 
     def get_fact_channel_obj_list(self) -> list:

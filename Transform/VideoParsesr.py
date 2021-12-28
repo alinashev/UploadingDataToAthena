@@ -15,17 +15,40 @@ class VideoParser(Parser):
         self.dim_time_obj_list: list = list()
 
     def parse(self, json_string: Any, video_obj_list: Any) -> None:
-        for obj in video_obj_list:
-            res_title: str = str(json_string[obj.get_video_id()]['items'][0]['snippet']['localized']['title'])
-            res_description: str = str(json_string[obj.get_video_id()]['items'][0]['snippet']['localized']['description'])
-            res_view_count: int = int(json_string[obj.get_video_id()]['items'][0]['statistics']['viewCount'])
-            res_like_count: int = int(json_string[obj.get_video_id()]['items'][0]['statistics']['likeCount'])
-            res_category_id: str = str(json_string[obj.get_video_id()]['items'][0]['snippet']['categoryId'])
+        print(len(video_obj_list))
+        i = 0
+        while i < len(video_obj_list):
+            obj = video_obj_list[i]
+            try:
+                res_description: str = str(
+                    json_string[obj.get_video_id()]['items'][0]['snippet']['localized']['description'])
+            except:
+                res_description = None
+
+            try:
+                res_view_count: int = int(json_string[obj.get_video_id()]['items'][0]['statistics']['viewCount'])
+            except:
+                res_view_count = 0
+
+            try:
+                res_like_count: int = int(json_string[obj.get_video_id()]['items'][0]['statistics']['likeCount'])
+            except:
+                res_like_count = 0
+
+            try:
+                res_category_id: str = str(json_string[obj.get_video_id()]['items'][0]['snippet']['categoryId'])
+            except:
+                res_category_id = None
+
+            try:
+                res_title: str = str(json_string[obj.get_video_id()]['items'][0]['snippet']['localized']['title'])
+            except:
+                res_title = None
 
             try:
                 res_comment_count: int = int(json_string[obj.get_video_id()]['items'][0]['statistics']['commentCount'])
-            except KeyError:
-                res_comment_count = int(0)
+            except:
+                res_comment_count = 0
 
             self.dim_video_obj_list.append(
                 DimVideo(str(obj.get_video_id()),
@@ -52,6 +75,7 @@ class VideoParser(Parser):
                     res_comment_count
                 )
             )
+            i = i + 1
 
     def get_fact_video_obj_list(self) -> list:
         return self.fact_video_obj_list

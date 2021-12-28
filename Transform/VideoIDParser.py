@@ -8,7 +8,8 @@ class VideoIDParser(Parser):
     def parse(self, json_string: Any, ChannelsID: Any) -> list[VideoID]:
         obj_list = list()
         for channelID in ChannelsID:
-            for i in range(0, 5):
+            count_of_videos = len(json_string[channelID]['items'])
+            for i in range(0, count_of_videos):
                 try:
                     res: str = (json_string[channelID]['items'][i]['id']['videoId'])
                 except KeyError:
