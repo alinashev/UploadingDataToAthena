@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `atestdb`.`factChannel` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`factChannel` (
 `channel_id` string,
  `date_id` string,
  `time_id` string,

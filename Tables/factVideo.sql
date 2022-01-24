@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `atestdb`.`factVideo` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`factVideo` (
  `video_id` string,
  `date_id` string,
  `time_id` string,

@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `atestdb`.`dimTimeVideo` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`dimTimeVideo` (
  `time_id` string,
  `hour` int,
  `minute` int,
