@@ -11,20 +11,23 @@ class ChannelParser(Parser):
     def __init__(self) -> None:
         self.fact_channel_obj_list: list = list()
         self.dim_channel_obj_list: list = list()
+
         self.dim_date_obj_list: list = list()
         self.dim_time_obj_list: list = list()
 
     def parse(self, json_string: Any, ChannelsID: Any) -> None:
+
+        date: DimDateChannel = DimDateChannel()
+        time: DimTimeChannel = DimTimeChannel()
+
+        self.dim_date_obj_list.append(date)
+        self.dim_time_obj_list.append(time)
+
         for channel_id in ChannelsID:
             self.dim_channel_obj_list.append(DimChannel(str(channel_id),
                                                         str(ChannelsID[channel_id])
                                                         )
                                              )
-            date: DimDateChannel = DimDateChannel()
-            time: DimTimeChannel = DimTimeChannel()
-
-            self.dim_date_obj_list.append(date)
-            self.dim_time_obj_list.append(time)
 
             try:
                 subscriberCount: int = int(json_string[channel_id]["items"][0]["statistics"]["subscriberCount"])

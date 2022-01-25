@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`dimDateChanne` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `{database}`.`dimDateChanne` (
  `date_id` string,
  `year` int,
  `month` int,

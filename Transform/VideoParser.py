@@ -15,7 +15,13 @@ class VideoParser(Parser):
         self.dim_time_obj_list: list = list()
 
     def parse(self, json_string: Any, video_obj_list: Any) -> None:
-        print(len(video_obj_list))
+
+        date: DimDateVideo = DimDateVideo()
+        time: DimTimeVideo = DimTimeVideo()
+
+        self.dim_date_obj_list.append(date)
+        self.dim_time_obj_list.append(time)
+
         i = 0
         while i < len(video_obj_list):
             obj = video_obj_list[i]
@@ -58,12 +64,6 @@ class VideoParser(Parser):
                          res_description,
                          res_category_id
                          ))
-
-            date: DimDateVideo = DimDateVideo()
-            time: DimTimeVideo = DimTimeVideo()
-
-            self.dim_date_obj_list.append(date)
-            self.dim_time_obj_list.append(time)
 
             self.fact_video_obj_list.append(
                 FactVideo(

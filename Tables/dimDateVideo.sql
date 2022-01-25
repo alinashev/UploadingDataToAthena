@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`dimDateVideo` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `{database}`.`dimDateVideo` (
  `date_id` string,
  `year` int,
  `month` int,

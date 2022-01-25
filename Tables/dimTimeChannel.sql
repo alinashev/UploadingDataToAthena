@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`dimTimeChannel` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `{database}`.`dimTimeChannel` (
  `time_id` string,
  `hour` int,
  `minute` int,

@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE IF NOT EXISTS `a-test-db-01`.`dimVideo` (
+CREATE EXTERNAL TABLE IF NOT EXISTS `{database}`.`dimVideo` (
  `channel_id` string,
  `channel_name` string,
  `video_id` string,
