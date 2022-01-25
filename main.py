@@ -1,6 +1,7 @@
 from Commons.DataVersion import DataVersion
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
+from Load.Loader import Loader
 from Load.ParquetFormat import ParquetFormat
 from Transform.ChannelParser import ChannelParser
 from Transform.VideoIDParser import VideoIDParser
@@ -58,7 +59,7 @@ def main():
     ParquetFormat.load(ctd_parser.get_dim_time_obj_list(), "DTV-" + ch_id + ".parquet")
 
     storage.upload("FC-" + ch_id + ".parquet",
-                   "Data/Channel/FactCahnnel/" + version.get_date() + "/" + version.get_hour())
+                   "Data/Channel/FactChannel/" + version.get_date() + "/" + version.get_hour())
     storage.upload("DC-" + ch_id + ".parquet",
                    "Data/Channel/DimChannel/" + version.get_date() + "/" + version.get_hour())
     storage.upload("DDC-" + ch_id + ".parquet",
@@ -74,6 +75,16 @@ def main():
                    "Data/Video/DimDateVideo/" + version.get_date() + "/" + version.get_hour())
     storage.upload("DTV-" + ch_id + ".parquet",
                    "Data/Video/DimTimeVideo/" + version.get_date() + "/" + version.get_hour())
+
+    Loader.load("Tables/factChannel.sql")
+    Loader.load("Tables/dimChannel.sql")
+    Loader.load("Tables/dimDateChannel.sql")
+    Loader.load("Tables/dimTimeChannel.sql")
+
+    Loader.load("Tables/factVideo.sql")
+    Loader.load("Tables/dimVideo.sql")
+    Loader.load("Tables/dimDateVideo.sql")
+    Loader.load("Tables/dimTimeVideo.sql")
 
 
 if __name__ == '__main__':
