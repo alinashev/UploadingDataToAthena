@@ -28,3 +28,10 @@ class StorageS3:
                 print("The object does not exist.")
             else:
                 raise
+
+    def upload(self, file_name, directory: str) -> None:
+        self.s3.meta.client.upload_file(file_name, self.bucket_name,
+                                        '{directory}/{name}'.format(
+                                            directory=directory,
+                                            name=file_name)
+                                        )
